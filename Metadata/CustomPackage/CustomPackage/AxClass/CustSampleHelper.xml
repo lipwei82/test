@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>CustSampleHelper</Name>
+  <SourceCode>
+    <Declaration><![CDATA[
+/// <summary>
+/// Helper class providing common utility methods for customer-related operations.
+/// </summary>
+public class CustSampleHelper
+{
+}
+]]></Declaration>
+    <Methods>
+      <Method>
+        <Name>getCustomerName</Name>
+        <Source><![CDATA[
+    /// <summary>
+    /// Retrieves the customer name for the given account number.
+    /// </summary>
+    /// <param name="_custAccount">The customer account number.</param>
+    /// <returns>The customer name, or an empty string if not found.</returns>
+    public static Name getCustomerName(CustAccount _custAccount)
+    {
+        CustTable custTable;
+
+        select firstOnly Name from custTable
+            where custTable.AccountNum == _custAccount;
+
+        return custTable.Name;
+    }
+]]></Source>
+      </Method>
+      <Method>
+        <Name>customerExists</Name>
+        <Source><![CDATA[
+    /// <summary>
+    /// Checks whether the given customer account exists.
+    /// </summary>
+    /// <param name="_custAccount">The customer account number.</param>
+    /// <returns>True if the customer record exists; otherwise false.</returns>
+    public static boolean customerExists(CustAccount _custAccount)
+    {
+        CustTable custTable = CustTable::find(_custAccount);
+
+        return custTable.RecId != 0;
+    }
+]]></Source>
+      </Method>
+    </Methods>
+  </SourceCode>
+</AxClass>

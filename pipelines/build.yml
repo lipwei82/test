@@ -1,0 +1,75 @@
+# Azure DevOps Build Pipeline for D365FO X++ Package
+# Compiles X++ source code and generates a deployable package.
+#
+# To use this pipeline:
+#   1. Import this YAML file into an Azure DevOps pipeline.
+#   2. Configure the 'NuGetFeedUrl' variable to point to your D365FO NuGet feed.
+#   3. Set 'ServiceConnection' to your Azure DevOps service connection name.
+
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+pr:
+  branches:
+    include:
+      - main
+      - develop
+
+variables:
+  PackageName: 'CustomPackage'
+  BuildSolution: 'Projects/CustomPackage.rnrproj'
+  NuGetFeedUrl: 'https://pkgs.dev.azure.com/<your-org>/_packaging/<your-feed>/nuget/v3/index.json'
+  ServiceConnection: '<your-service-connection-name>'
+  ArtifactName: 'DeployablePackage'
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+  - stage: Build
+    displayName: 'Build X++ Package'
+    jobs:
+      - job: CompileXpp
+        displayName: 'Compile X++ and Generate Deployable Package'
+        steps:
+          - checkout: self
+            fetchDepth: 0
+
+          - task: NuGetToolInstaller@1
+            displayName: 'Install NuGet'
+
+          - task: NuGetCommand@2
+            displayName: 'Restore NuGet packages'
+            inputs:
+              command: 'restore'
+              restoreSolution: '$(BuildSolution)'
+              feedsToUse: 'config'
+              externalFeedCredentials: '$(ServiceConnection)'
+
+          - task: VSBuild@1
+            displayName: 'Build X++ project'
+            inputs:
+              solution: '$(BuildSolution)'
+              platform: 'AnyCPU'
+              configuration: 'Release'
+
+          - task: PowerShell@2
+            displayName: 'Create deployable package'
+            inputs:
+              targetType: 'inline'
+              script: |
+                $packagePath = "$(Build.ArtifactStagingDirectory)\$(ArtifactName)"
+                New-Item -ItemType Directory -Force -Path $packagePath
+                # Copy compiled binaries to artifact staging directory
+                Copy-Item -Path "$(Build.SourcesDirectory)\Metadata\$(PackageName)\bin\*" `
+                          -Destination $packagePath -Recurse -Force
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish deployable package artifact'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)\$(ArtifactName)'
+              ArtifactName: '$(ArtifactName)'
+              publishLocation: 'Container'

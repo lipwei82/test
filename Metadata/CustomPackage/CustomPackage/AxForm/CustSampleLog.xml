@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxForm xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>CustSampleLog</Name>
+  <SourceCode>
+    <Declaration><![CDATA[
+[Form]
+public class CustSampleLog extends FormRun
+{
+}
+]]></Declaration>
+    <Methods>
+      <Method>
+        <Name>init</Name>
+        <Source><![CDATA[
+    public void init()
+    {
+        super();
+    }
+]]></Source>
+      </Method>
+    </Methods>
+  </SourceCode>
+  <DataSources>
+    <AxFormDataSource xmlns="">
+      <Name>CustSampleLog</Name>
+      <Table>CustSampleLog</Table>
+      <Fields>
+        <AxFormDataSourceField>
+          <DataField>CustAccount</DataField>
+        </AxFormDataSourceField>
+        <AxFormDataSourceField>
+          <DataField>LogDateTime</DataField>
+        </AxFormDataSourceField>
+        <AxFormDataSourceField>
+          <DataField>Message</DataField>
+        </AxFormDataSourceField>
+      </Fields>
+    </AxFormDataSource>
+  </DataSources>
+  <Design>
+    <Caption>Customer Sample Log</Caption>
+    <Pattern>SimpleList</Pattern>
+    <Controls>
+      <AxFormControl xmlns="" i:type="AxFormGridControl">
+        <Name>GridCustSampleLog</Name>
+        <DataSource>CustSampleLog</DataSource>
+        <Controls>
+          <AxFormControl xmlns="" i:type="AxFormStringControl">
+            <Name>CustAccount</Name>
+            <DataSource>CustSampleLog</DataSource>
+            <DataField>CustAccount</DataField>
+          </AxFormControl>
+          <AxFormControl xmlns="" i:type="AxFormDateTimeControl">
+            <Name>LogDateTime</Name>
+            <DataSource>CustSampleLog</DataSource>
+            <DataField>LogDateTime</DataField>
+          </AxFormControl>
+          <AxFormControl xmlns="" i:type="AxFormStringControl">
+            <Name>Message</Name>
+            <DataSource>CustSampleLog</DataSource>
+            <DataField>Message</DataField>
+          </AxFormControl>
+        </Controls>
+      </AxFormControl>
+    </Controls>
+  </Design>
+</AxForm>

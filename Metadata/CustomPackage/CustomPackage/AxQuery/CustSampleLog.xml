@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxQuery xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>CustSampleLog</Name>
+  <Title>Customer Sample Log</Title>
+  <DataSources>
+    <AxQueryDataSource>
+      <Name>CustSampleLog</Name>
+      <DynamicFields>Yes</DynamicFields>
+      <Table>CustSampleLog</Table>
+      <DataSources />
+      <Fields>
+        <AxQueryDataSourceField>
+          <DataField>CustAccount</DataField>
+        </AxQueryDataSourceField>
+        <AxQueryDataSourceField>
+          <DataField>LogDateTime</DataField>
+        </AxQueryDataSourceField>
+        <AxQueryDataSourceField>
+          <DataField>Message</DataField>
+        </AxQueryDataSourceField>
+      </Fields>
+      <Ranges />
+      <GroupBy />
+      <OrderBy />
+    </AxQueryDataSource>
+  </DataSources>
+  <GroupBy />
+  <OrderBy />
+  <Range />
+</AxQuery>
