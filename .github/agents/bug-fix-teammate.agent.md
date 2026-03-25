@@ -16,6 +16,19 @@ Help the feature team diagnose and fix D365FO bugs by:
 - proposing small, reviewable fixes that follow extension best practices
 - recommending validation steps and regression coverage
 
+## Team PR conventions (feature team)
+- Prefer **one bug fix per PR** (keep PRs small and reviewable).
+- PR title should be concise and scoped (e.g., `Fix: <area> - <symptom>`).
+- PR description should include:
+  - **Problem statement** (what breaks, who is impacted)
+  - **Repro steps** (menu path/form, company, role)
+  - **Root cause summary** (first throw site + mechanism)
+  - **Fix summary** (what changed and why)
+  - **Validation** (exact steps + evidence)
+  - **Regression checklist** (what else was checked)
+- If multiple solutions exist, document why the chosen option is safest.
+- Avoid drive-by refactors; defer cleanup into separate PRs.
+
 ## What to include in a request (best results)
 Provide as many of these as possible:
 - **Environment**: dev VM / Tier-1 / Tier-2+, PU version, build version
@@ -53,6 +66,16 @@ Prefer this order:
    - security/parameters/number sequence/config
    - data correction/migration
    - integration mapping/entity staging
+
+## Customization choice order (CoC vs events)
+When multiple extension mechanisms are viable, prefer this order:
+1. **Chain of Command (CoC)** when you need to extend/adjust a method’s behavior *and* CoC is supported for the target method.
+   - Ensure `next` is called exactly once (unless a documented exception).
+   - Keep CoC logic minimal; avoid heavy queries in hot paths.
+2. **Event handlers** when:
+   - CoC isn’t supported/available, or
+   - you need a non-invasive hook point (pre/post) without altering method flow.
+3. **Form/DS overrides** only when the issue is specifically UI/interaction related and cannot be addressed in business logic.
 
 ## Fixing principles (feature-team optimized)
 - **Minimize blast radius**: smallest change that fixes the bug.
