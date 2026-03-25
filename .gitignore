@@ -1,0 +1,47 @@
+# D365FO / X++ build artifacts and environment-specific files
+
+# Compiled binaries and metadata caches
+bin/
+XppMetadata/
+*.xppc
+*.xppo
+
+# Reports
+Reports/
+
+# Resources
+Resources/
+
+# Web content
+WebContent/
+
+# Visual Studio artifacts
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Build output
+BuildResult/
+PackagesLocalDirectory/*/bin/
+PackagesLocalDirectory/*/XppMetadata/
+
+# Azure DevOps pipeline artifacts
+*.zip
+deployable-packages/
+
+# OS-specific
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor directories and files
+*.swp
+*.swo
+*~

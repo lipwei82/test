@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(VSToolsPath)\Dynamics365\Dynamics365.targets" Condition="'$(VSToolsPath)' != ''" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomPackage</RootNamespace>
+    <AssemblyName>CustomPackage</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <ModelPath>..\Metadata\CustomPackage</ModelPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\Metadata\CustomPackage\CustomPackage\AxClass\CustSampleHelper.xml" />
+    <Content Include="..\Metadata\CustomPackage\CustomPackage\AxTable\CustSampleLog.xml" />
+    <Content Include="..\Metadata\CustomPackage\CustomPackage\AxForm\CustSampleLog.xml" />
+    <Content Include="..\Metadata\CustomPackage\CustomPackage\AxQuery\CustSampleLog.xml" />
+    <Content Include="..\Metadata\CustomPackage\CustomPackage\AxMenuItemDisplay\CustSampleLog.xml" />
+    <Content Include="..\Metadata\CustomPackage\Descriptor\CustomPackage.xml" />
+  </ItemGroup>
+</Project>
