@@ -54,7 +54,7 @@
   <Indexes>
     <AxTableIndex>
       <Name>CustAccountIdx</Name>
-      <AllowDuplicates>Yes</AllowDuplicates>
+      <AllowDuplicates>No</AllowDuplicates>
       <Fields>
         <AxTableIndexField>
           <DataField>CustAccount</DataField>
