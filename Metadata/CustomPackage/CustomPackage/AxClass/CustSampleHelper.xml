@@ -23,8 +23,18 @@ public class CustSampleHelper
     {
         CustTable custTable;
 
+        if (_custAccount == '')
+        {
+            return '';
+        }
+
         select firstOnly Name from custTable
             where custTable.AccountNum == _custAccount;
+
+        if (!custTable.RecId)
+        {
+            return '';
+        }
 
         return custTable.Name;
     }
